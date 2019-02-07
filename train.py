@@ -24,6 +24,9 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
 
+print("TENSORFLOW VERSION:", tf.__version__)
+tf.test.is_gpu_available()
+
 #tf.enable_eager_execution()
 
 
@@ -32,24 +35,25 @@ from fcn_vgg import FCN8VGG, ImageReader, decode_labels
 BATCH_SIZE = 20
 DATA_DIRECTORY = '/scratch/hnkmah001/Datasets/VOCdevkit'
 DATA_LIST_PATH = './dataset/train.txt'
-VAL_DATA_LIST_PATH = './dataset/val.txt'
+VAL_DATA_LIST_PATH = './dataset-voc2011/val.txt'
 INPUT_SIZE = '321,321'
+#INPUT_SIZE = '500,500'
 #INPUT_SIZE = None
 LEARNING_RATE = 1e-4
 MOMENTUM = 0.9
 WEIGHT_DECAY = 5e-4
 MEAN_IMG = tf.Variable(np.array((104.00698793,116.66876762,122.67891434)), trainable=False, dtype=tf.float32)
 NUM_STEPS = 10000
-VALIDATION_STEPS = 1449//BATCH_SIZE
+VALIDATION_STEPS = 1111//BATCH_SIZE
 RANDOM_SCALE = True
 #RESTORE_FROM = './snapshots/model.ckpt-2000'
 RESTORE_FROM = None
-SAVE_DIR = './images/'
+SAVE_DIR = '/scratch/hnkmah001/FCN-MIL-GMP-LOSS/images/'
 SAVE_NUM_IMAGES = 1
 SAVE_PRED_EVERY = 500
-SNAPSHOT_DIR = './snapshots/'
+SNAPSHOT_DIR = '/scratch/hnkmah001/FCN-MIL-GMP-LOSS/snapshots/'
 WEIGHTS_PATH   = '/scratch/hnkmah001/Pretrained_models/vgg16.npy'
-SUMMARIES_DIR  = './summaries/'
+SUMMARIES_DIR  = '/scratch/hnkmah001/FCN-MIL-GMP-LOSS/summaries/'
 
 IMG_MEAN = np.array((104.00698793,116.66876762,122.67891434), dtype=np.float32)
 
@@ -187,7 +191,7 @@ def main():
     print("TRAINABLE VARIABLES: ", trainable)
    
     # Saver for storing the last 10 checkpoints of the model.
-    saver = tf.train.Saver(var_list=trainable, max_to_keep=10)
+    saver = tf.train.Saver(var_list=trainable, max_to_keep=40)
     if args.restore_from is not None:
         load(saver, sess, args.restore_from)
     

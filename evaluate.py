@@ -22,13 +22,13 @@ import numpy as np
 
 from fcn_vgg import FCN8VGG, ImageReader, decode_labels
 
-DATA_DIRECTORY = '/home/anicet/Datasets/VOCdevkit'
+DATA_DIRECTORY = '/scratch/hnkmah001/Datasets/VOCdevkit'
 DATA_LIST_PATH = None
-VAL_DATA_LIST_PATH = './dataset/val.txt'
-NUM_STEPS = 1449
-RESTORE_FROM = './snapshots/model.ckpt-4000'
-SAVE_DIR = './val_images-ckpt-4000/'
-WEIGHTS_PATH   = '/home/anicet/Pretrained_models/vgg16.npy'
+VAL_DATA_LIST_PATH = './dataset-voc2011/val.txt'
+NUM_STEPS = 1111
+RESTORE_FROM = '/scratch/hnkmah001/FCN-MIL-GMP-LOSS/snapshots/model.ckpt-7500'
+SAVE_DIR = '/scratch/hnkmah001/FCN-MIL-GMP-LOSS/val_images-ckpt-7500/'
+WEIGHTS_PATH   = '/scratch/hnkmah001/Pretrained_models/vgg16.npy'
 num_classes = 21
 
 IMG_MEAN = np.array((104.00698793,116.66876762,122.67891434), dtype=np.float32)
